@@ -1,45 +1,212 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Lane&#39;s Me by laneallen</title>
+    <title>Lane's Me (Lane Allen)</title>
+    <meta name="author" content="Lane Allen">
+    <meta name="description" content="Lanes.me and LaneAllen.com starting area to my other projects and developments.">
+    <meta name="keywords" content="graphics, design, graphic design, character design, 3D, Zbrush, Blender, sound, Logic X, development, gamedev, indiedev, unreal engine, ue4, javascript, react, reactjs, ui, ux, vector, svg">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!--
+      Using cdn for now while developing.
+      TODO: Bundle with gulp and npm modules.
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+    //-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.2/jquery.fullPage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.2/vendors/jquery.easings.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.2/vendors/jquery.slimscroll.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.2/jquery.fullPage.min.css" />
+
+    <!--
+      TODO:
+      I looked at semantic-ui, but I think I'm just going to go with a CSS-JS solution.
+      Maybe look at either Radium or PostCSS.
+    //-->
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin');
+
+    body {
+      margin: 0px;
+      padding: 0px;
+      overflow-x: hidden;
+      min-width: 320px;
+      background: #FFFFFF;
+      font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+      line-height: 1.4285em;
+      color: rgba(0, 0, 0, 0.87);
+      font-smoothing: antialiased;
+    }
+
+  	/* Style for our header texts */
+  	h1 {
+  		font-size: 4em;
+  		margin:0;
+  		padding:0;
+  	}
+
+  	/* Centered texts in each section */
+  	.section {
+  		text-align:center;
+  	}
+
+  	/* Backgrounds will cover all the section */
+  	.section {
+      background-position: center bottom;
+      background-repeat: no-repeat;
+  		background-size: cover;
+  	}
+  	.slide {
+  		background-size: cover;
+  	}
+
+  	/* Defining each section background and styles */
+  	#section0 {
+  		padding: 15% 0 0 0;
+  	}
+    #section1 {
+
+    }
+  	#section2 {
+      background-image: url(static/lane-newt.png);
+  		padding: 6% 0 0 0;
+  	}
+  	#section3 {
+      background-image: url(static/stimulilab-irisfilo3.jpg);
+  		padding: 6% 0 0 0;
+  	}
+  	#section3 h1 {
+  		color: #FFF;
+  	}
+
+   	/*Adding background for the slides */
+  	#slide1 {
+      background-image: url(static/trlolls-concept1.png);
+  		padding: 6% 0 0 0;
+  	}
+  	#slide2 {
+      padding: 12% 0 0 0;
+  	}
+
+    .thread {
+      text-align: left;
+      padding: 6% 15% 0 15%;
+    }
+
+    svg path {
+      fill: white;
+    }
+    svg:hover path {
+      fill: #B79AFF;
+    }
+    .social-link {
+      padding: 1em;
+    }
+
+  	</style>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#content').fullpage({
+          scrollBar: true,
+          sectionsColor: ['#FFFFFF', '#DEE1E2', '#FFFFFF', '#292E37'],
+          verticalCentered: false
+        });
+
+        // Replace all SVG images with inline SVG
+
+        jQuery('img.svg').each(function(){
+          var $img = jQuery(this);
+          var imgID = $img.attr('id');
+          var imgClass = $img.attr('class');
+          var imgURL = $img.attr('src');
+
+          jQuery.get(imgURL, function(data) {
+            // Get the SVG tag, ignore the rest
+            var $svg = jQuery(data).find('svg');
+
+            // Add replaced image's ID to the new SVG
+            if(typeof imgID !== 'undefined') {
+              $svg = $svg.attr('id', imgID);
+            }
+            // Add replaced image's classes to the new SVG
+            if(typeof imgClass !== 'undefined') {
+              $svg = $svg.attr('class', imgClass+' replaced-svg');
+            }
+
+            // Remove any invalid XML tags as per http://validator.w3.org
+            $svg = $svg.removeAttr('xmlns:a');
+
+            // Replace image with new SVG
+            $img.replaceWith($svg);
+          });
+        });
+
+      });
+    </script>
+
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Lane&#39;s Me</h1>
-        <p>Personal site for Lane Allen</p>
+    <div id="content" class="pusher">
 
+      <div class="ui container section vertical masthead center aligned" id="section0">
+    		<div class="intro center aligned column">
+    			<img src="static/lane-scribbles.png"  alt="Lane" />
+    		</div>
+    	</div>
 
-        <p class="view"><a href="https://github.com/laneallen">View My GitHub Profile</a></p>
+    	<div class="section" id="section1">
+  	    <div class="slide" id="slide1">
+    			<div class="ui container intro">
+    				<h1>Projects</h1>
+    				<p>
+    					What I'm working on.
+    				</p>
+    			</div>
+    		</div>
+  	    <div class="slide" id="slide2">
+  			  <img src="static/stimuli-logo-l.svg" width="30%" height="30%" />
+  		  </div>
+    	</div>
 
-      </header>
-      <section>
-        <p>I've been a creative (+geek) for over twelve years. Recently, I've focused entirely on Javascript to work with Node.js, as well as game, mobile, web, and app development. This has lead me to completely tearing down my *AMP stack so I can now work purely in Javascript, both on the client and server side with Node. I &lt;3 Mac's, iOS and Linux. My most used apps are Illustrator, SketchBook, Photoshop, Chrome, TextMate, and Terminal. I don't FTP; I Git, so SSH. I believe DnB and Dubstep create a better world. I'm an ENFP.</p>
-      </section>
-      <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-40338495-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+    	<div class="ui container section" id="section2">
+    		<div class="intro">
+    			<h1>Who am I</h1>
+            <div class="thread">
+      			<p>
+              I am a creative and geek. I've been pushing into game development; working with Unreal Engine 4, webgl/javascript, and VR. I am looking to push out some games in late 2015 or early 2016. I currently work as an indie, doing graphics, character development, 3D (Zbrush, Substance and Blender), sound (Logic X), and writing. I love researching comparative mythology, focusing on parallels all over the world, then referencing that with astronomy (my favorite book is "Star Names and Their Meanings (Allen)"). I'm a mixture of ENFP and INFP.
+            </p>
+            </div>
+    		</div>
+    	</div>
 
+      <div class="ui container section" id="section3">
+        <div class="intro">
+          <h1>You can find me in these places</h1>
+          <div class="thread">
+            <a href="https://twitter.com/laneallen"><img id="logo-twitter" class="svg social-link" src="static/svg/twitter.svg" /></a>
+            <a href="https://github.com/laneallen"><img id="logo-github" class="svg social-link" src="static/svg/github.svg" /></a>
+            <a href="https://soundcloud.com/laneallen"><img id="logo-soundcloud" class="svg social-link" src="static/svg/cloud.svg" /></a>
+            <a href="https://www.behance.net/laneallen"><img id="logo-behance" class="svg social-link" src="static/svg/behance.svg" /></a>
+            <a href="https://www.pinterest.com/lanesme/"><img id="logo-pinterest" class="svg social-link" src="static/svg/pinterest.svg" /></a>
+            <a href="https://instagram.com/lanesme/"><img id="logo-instagram" class="svg social-link" src="static/svg/camera.svg" /></a>
+            <a href="https://www.linkedin.com/in/laneallen"><img id="logo-linkedin" class="svg social-link" src="static/svg/linkedin.svg" /></a>
+            <a href="https://www.flickr.com/photos/laneallen"><img id="logo-flickr" class="svg social-link" src="static/svg/flickr.svg" /></a>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- End #content -->
+
+    <!--
+    TODO: Build with React.
+    <div id="content"></div>
+
+    <script src="app.js" type="text/babel"></script>
+    // -->
   </body>
 </html>
